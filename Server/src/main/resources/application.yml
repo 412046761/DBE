@@ -1,0 +1,21 @@
+--- 
+spring: !java.util.HashMap
+  datasource: !java.util.HashMap
+    password: qwe8584951
+    minIdle: 5
+    initialSize: 5
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://liyue08alibaba.mysql.rds.aliyuncs.com:3306/demo?useUnicode=true&characterEncoding=UTF-8&&useSSL=true&serverTimezone=UTC"
+    username: liyue08
+    maxActive: 20
+logging: !java.util.HashMap
+  level: !java.util.HashMap
+    mp.dao: trace
+    liyue08: warn
+  pattern: !java.util.HashMap
+    console: %p%m%n
+mybatis-plus: !java.util.HashMap
+  global-config: !java.util.HashMap
+    db-config: !java.util.HashMap
+      logic-not-delete-value: 0
+      logic-delete-value: 1
