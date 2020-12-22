@@ -1,10 +1,20 @@
 package client;
 
 import client.commen.SwingUtils;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Name;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * @description: 界面展示
@@ -12,6 +22,7 @@ import java.awt.event.ActionListener;
  * @date: 2020/11/23 11:46
  */
 public class ClientComponent {
+    static String  FILL_PATH ="C:\\Users\\41204\\Desktop\\DBE.xls";
     public static void placeComponents(JPanel panel) {
 
         /* 布局部分我们这边不多做介绍
@@ -41,6 +52,34 @@ public class ClientComponent {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                {
+
+                    // 创建一个excel对象
+                    HSSFWorkbook wb = null;
+                    String excelName = "DBE模板";
+
+                    wb = new HSSFWorkbook();
+                    HSSFSheet sheet = wb.createSheet(excelName);
+
+                    HSSFRow row = sheet.createRow(0);
+                    row.setHeightInPoints(20);
+
+                    CellRangeAddressList regions = new CellRangeAddressList(0, 0, 0, 0);
+                    //获取单元格的坐标
+                    sheet.setDefaultColumnWidth(500);
+
+                    OutputStream output;
+
+                    try {
+                        output = new FileOutputStream(FILL_PATH);
+                        wb.write(output);
+                        output.close();
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
 
             }
         });
@@ -56,6 +95,28 @@ public class ClientComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                {
+                    File file = null;
+                    try{
+                        file = new File(FILL_PATH);
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+
+
+                    if(file == null){
+                        return ;
+                    }
+
+//                    //判断文件是否是excel文件
+//                    if(!file..endsWith("xls") && !file.getOriginalFilename().endsWith("xlsx")){
+//                        return Response.error(ResultEnum.EXCEL_TYPE_ERROR);
+//                    }
+//
+
+
+
+                }
             }
         });
     }

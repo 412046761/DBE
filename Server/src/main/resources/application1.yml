@@ -1,4 +1,3 @@
---- 
 spring: !java.util.HashMap
   datasource: !java.util.HashMap
     password: qwe8584951
