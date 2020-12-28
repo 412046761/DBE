@@ -106,14 +106,12 @@ public class ClientComponent {
 
         // 为按钮绑定监听器
         saveButton.addActionListener(new ActionListener() {
-            @Resource
+            @Autowired
             public PrimaryMapper primaryMapper;
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 {
-
-
                     MultipartFile file = null;
                     try{
                         File  file1 = new File(FILL_PATH);
@@ -135,14 +133,21 @@ public class ClientComponent {
 
                     // 数据库执行SQL
                     List<List<Map<String, Object>>> rsList = getRSForDB(sqlList);
-                    // TODO : 将返回值序列化为Ecsle
 
+                    //  将返回值序列化为Ecsle
+                    exportEcsle(rsList);
 
                 }
             }
 
+
+            private void exportEcsle(List<List<Map<String, Object>>> rsList) {
+                if(rsList == null || rsList.size()==0) return;
+            }
+
             private List<List<Map<String, Object>>> getRSForDB(List<String> sqlList) {
                 List<List<Map<String, Object>>> rslist = new ArrayList<>();
+
                 for (String sql :sqlList ) {
                     List<Map<String,Object>> rs = primaryMapper.getList(sql);
                     if(rs != null && rs.size()>0)
