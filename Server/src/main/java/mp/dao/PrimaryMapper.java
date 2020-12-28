@@ -1,6 +1,9 @@
 package mp.dao;
 
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -14,28 +17,12 @@ import java.util.Map;
 public interface PrimaryMapper {
 
     /**
-     * 校验主键一致性
+     * 动态查询语句
      * @param sql
      * @return
      */
     @Select("<script>${sql}</script>")
     @Options(flushCache = Options.FlushCachePolicy.FALSE,useCache = false,timeout = 10000)
-    List<Map<String,String>> getList(@Param("sql") String sql);
-    /**
-     * 插入数据
-     * @param sql
-     * @return
-     */
-    @Insert("<script>${sql}</script>")
-    @Options(flushCache = Options.FlushCachePolicy.FALSE,useCache = false,timeout = 10000)
-    void insert70(@Param("sql") String sql);
-    /**
-     * 校验数目一致性
-     * @param sql
-     * @return
-     */
-    @Select("<script>${sql}</script>")
-    @Options(flushCache = Options.FlushCachePolicy.FALSE,useCache = false,timeout = 10000)
-    Integer checkCountDB70(@Param("sql") String sql);
+    List<Map<String,Object>> getList(@Param("sql") String sql);
 
 }
