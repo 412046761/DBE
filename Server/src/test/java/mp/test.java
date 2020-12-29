@@ -27,7 +27,7 @@ public class test {
 
     @Test
     public void getListTest(){
-        List<Map<String,String>> rslist = mapper.getList(" select * from user where id ='1087982257332887553' ");
+        List<Map<String,Object>> rslist = mapper.getList(" select * from user where id ='1087982257332887553' ");
         rslist.forEach(System.out::println);
     }
     //读取yaml配置文件Map结构
