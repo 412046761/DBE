@@ -1,5 +1,6 @@
 package client;
 
+import client.commen.MapperUtils;
 import client.commen.SwingUtils;
 import mp.dao.PrimaryMapper;
 import org.apache.poi.hssf.usermodel.*;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -106,8 +108,6 @@ public class ClientComponent {
 
         // 为按钮绑定监听器
         saveButton.addActionListener(new ActionListener() {
-            @Autowired
-            public PrimaryMapper primaryMapper;
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -144,12 +144,13 @@ public class ClientComponent {
             private void exportEcsle(List<List<Map<String, Object>>> rsList) {
                 if(rsList == null || rsList.size()==0) return;
             }
-
+            @Autowired
+            MapperUtils mapperUtils;
             private List<List<Map<String, Object>>> getRSForDB(List<String> sqlList) {
                 List<List<Map<String, Object>>> rslist = new ArrayList<>();
 
                 for (String sql :sqlList ) {
-                    List<Map<String,Object>> rs = primaryMapper.getList(sql);
+                    List<Map<String,Object>> rs = mapperUtils.getList(sql);
                     if(rs != null && rs.size()>0)
                     rslist.add(rs);
                 }

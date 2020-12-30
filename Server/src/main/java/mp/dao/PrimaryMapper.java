@@ -1,5 +1,6 @@
 package mp.dao;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.TargetInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +25,4 @@ public interface PrimaryMapper {
     @Select("<script>${sql}</script>")
     @Options(flushCache = Options.FlushCachePolicy.FALSE,useCache = false,timeout = 10000)
     List<Map<String,Object>> getList(@Param("sql") String sql);
-
 }
